@@ -36,4 +36,16 @@
   <button bindtap="startSoterAuthentication">
     startSoterAuthentication
   </button>
+  <button bindtap="getFileSystemManager">
+    getFileSystemManager
+  </button>
+  <button bindtap="downloadFile">
+    downloadFile
+  </button>
+  <button bindtap="startBluetoothDevicesDiscovery">
+    startBluetoothDevicesDiscovery
+  </button>
+  <button bindtap="request">
+    request
+  </button>
 </view>

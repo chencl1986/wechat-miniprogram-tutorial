@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
+const toast = require('../../utils/toast')
 
 Page({
   data: {
@@ -43,14 +44,14 @@ Page({
   getUserInfo() {
     wx.getUserInfo({
       success(res) {
-        console.log(res)
+        toast(JSON.stringify(res))
       }
     })
   },
   login() {
     wx.login({
       success(res) {
-        console.log(res)
+        toast(JSON.stringify(res))
       }
     })
   },
@@ -58,7 +59,7 @@ Page({
     wx.scanCode({
       scanType: ['barCode', 'qrCode'],
       success(res) {
-        console.log(res)
+        toast(JSON.stringify(res))
       }
     })
   },
@@ -75,7 +76,7 @@ Page({
   getBatteryInfo() {
     wx.getBatteryInfo({
       success(res) {
-        console.log(res)
+        toast(JSON.stringify(res))
       }
     })
   },
@@ -84,7 +85,7 @@ Page({
       SSID: '',
       password: '',
       success(res) {
-        console.log(res.errMsg)
+        toast(JSON.stringify(res))
       }
     })
   },
@@ -94,18 +95,62 @@ Page({
       challenge: '123456',
       authContent: '请用指纹解锁',
       success(res) {
-        wx.showToast({
-          title: JSON.stringify(res),
-          icon: 'none'
-        })
+        toast(JSON.stringify(res))
       },
       fail(res) {
-        wx.showToast({
-          title: JSON.stringify(res),
-          icon: 'none',
-          duration: 100000
-        })
+        toast(JSON.stringify(res))
       },
+    })
+  },
+  getFileSystemManager() {
+    const fs = wx.getFileSystemManager()
+
+    fs.writeFile({
+      filePath: 'test.txt',
+      data: 'test' + Math.random(),
+      success(res) {
+        toast(JSON.stringify(res))
+      },
+      fail(res) {
+        toast(JSON.stringify(res))
+      },
+    })
+  },
+  downloadFile() {
+    wx.downloadFile({
+      url: 'https://cn.bing.com/sa/simg/hpc26i_2x.png',
+      filePath: 'hpc26i_2x.png',
+      success(res) {
+        toast(JSON.stringify(res))
+      },
+      fail(res) {
+        toast(JSON.stringify(res))
+      },
+    })
+  },
+  startBluetoothDevicesDiscovery() {
+    wx.startBluetoothDevicesDiscovery({
+      success(res) {
+        toast(JSON.stringify(res))
+        wx.stopBluetoothDevicesDiscovery()
+      },
+      fail(res) {
+        toast(JSON.stringify(res))
+      },
+    })
+  },
+  request() {
+    wx.request({
+      url: 'https://cn.bing.com/search',
+      data: { q: 'abc', safe: 'off' },
+      method: 'get',
+      dataType: 'text',
+      success(res) {
+        toast(JSON.stringify(res))
+      },
+      fail(res) {
+        toast(JSON.stringify(res))
+      }
     })
   },
 })
